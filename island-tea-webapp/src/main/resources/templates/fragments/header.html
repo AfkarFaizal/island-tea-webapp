@@ -1,0 +1,11 @@
+<header class="site-header" th:fragment="header(activePage)">
+  <nav class="nav-bar">
+    <a class="brand" href="/">Island Tea Co. <strong>&amp; Ceylon Coffee Club</strong></a>
+    <ul class="nav-links">
+      <li><a href="/" th:classappend="${activePage == 'home'} ? 'active'">Home</a></li>
+      <li><a href="/menu" th:classappend="${activePage == 'menu'} ? 'active'">Menu</a></li>
+      <li><a href="/reviews" th:classappend="${activePage == 'reviews'} ? 'active'">Reviews</a></li>
+      <li><a href="/about" th:classappend="${activePage == 'about'} ? 'active'">About</a></li>
+    </ul>
+  </nav>
+</header>

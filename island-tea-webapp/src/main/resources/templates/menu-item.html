@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="(${item} != null ? ${item.name} : 'Not found') + ' · ' + ${cafe.name}">Item</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header(${activePage})}"></div>
+
+<section style="padding-top:48px; min-height:40vh;">
+  <div class="container" th:if="${item != null}">
+    <div class="section-head">
+      <h2 th:text="${item.name}">Item</h2>
+      <span class="label" th:text="${item.category.displayName}">Category</span>
+    </div>
+    <p th:text="${item.description}">Description</p>
+    <div class="price" style="font-size:1.4rem;" th:text="'Rs ' + ${item.priceRs}">Rs 0</div>
+    <p style="margin-top:24px;"><a href="/menu">&larr; Back to menu</a></p>
+  </div>
+  <div class="container" th:if="${item == null}">
+    <h2>Item not found</h2>
+    <p><a href="/menu">&larr; Back to menu</a></p>
+  </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer(${cafe})}"></div>
+</body>
+</html>

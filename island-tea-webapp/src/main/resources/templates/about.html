@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="'About · ' + ${cafe.name}">About</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header(${activePage})}"></div>
+
+<section style="padding-top:48px;">
+  <div class="container">
+    <div class="section-head">
+      <h2>About &amp; Visit</h2>
+    </div>
+
+    <p th:text="${cafe.tagline}">Tagline</p>
+
+    <ul class="info-list">
+      <li><span class="k">Address</span><span th:text="${cafe.address}">Address</span></li>
+      <li><span class="k">Plus code</span><span th:text="${cafe.plusCode}">Code</span></li>
+      <li><span class="k">Phone</span><span th:text="${cafe.phone}">Phone</span></li>
+      <li><span class="k">Price range</span><span th:text="${cafe.priceRange}">Range</span></li>
+      <li><span class="k">Rating</span><span th:text="${cafe.googleRating} + ' (' + ${cafe.googleReviewCount} + ' Google reviews)'">Rating</span></li>
+    </ul>
+
+    <h3 style="margin-top:36px;">Amenities</h3>
+    <div class="category-tabs">
+      <span th:each="f : ${cafe.features}" style="padding:8px 16px;border:1px solid #b98a34;border-radius:999px;font-size:0.88rem;color:#1f3d2e;" th:text="${f}">Feature</span>
+    </div>
+  </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer(${cafe})}"></div>
+</body>
+</html>

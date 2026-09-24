@@ -1,0 +1,16 @@
+<footer class="site-footer" th:fragment="footer(cafe)">
+  <div class="container">
+    <div>
+      <div><strong th:text="${cafe.name}">Island Tea Co.</strong></div>
+      <div th:text="${cafe.address}">Address</div>
+    </div>
+    <div>
+      <div>Call <a th:href="'tel:' + ${cafe.phone}" th:text="${cafe.phone}">phone</a></div>
+      <div th:text="${cafe.priceRange}">Rs 1,000-2,000</div>
+    </div>
+    <div>
+      <div>Open · Closes 7:30 PM</div>
+      <div th:text="${cafe.plusCode}">Plus code</div>
+    </div>
+  </div>
+</footer>

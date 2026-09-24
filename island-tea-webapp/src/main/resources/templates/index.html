@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${cafe.name} + ' · Malabe'">Island Tea Co.</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header(${activePage})}"></div>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">MALABE · CAFE</div>
+      <h1 th:text="${cafe.tagline}">Tagline</h1>
+      <p class="lede">
+        A quiet, spacious cafe inside ICC Techno Hub pouring single-estate Ceylon tea
+        and locally roasted coffee, alongside a proper breakfast menu — the kind of
+        place regulars come back to before 8am and stay a while.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/menu">View the menu</a>
+        <a class="btn btn-outline" th:href="'tel:' + ${cafe.phone}">Call to reserve</a>
+      </div>
+      <div class="hero-meta">
+        <div class="stat">
+          <strong th:text="${cafe.googleRating}">4.9</strong>
+          <span th:text="${cafe.googleReviewCount} + ' Google reviews'">40 reviews</span>
+        </div>
+        <div class="stat">
+          <strong th:text="${cafe.priceRange}">Rs 1,000-2,000</strong>
+          <span>per person</span>
+        </div>
+        <div class="stat">
+          <strong>7:30 PM</strong>
+          <span>closing time today</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <svg class="leaf-motif" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="130" cy="130" r="118" fill="none" stroke="#b98a34" stroke-width="1.5" opacity="0.45"/>
+        <path d="M130 40 C170 70 190 110 170 160 C150 205 100 215 80 180 C60 145 90 60 130 40 Z"
+              fill="#3f6b52" opacity="0.9"/>
+        <path d="M130 45 C130 90 130 150 118 205" stroke="#eaf0e7" stroke-width="2" fill="none"/>
+        <circle cx="70" cy="200" r="5" fill="#d9ad5c"/>
+        <circle cx="190" cy="90" r="4" fill="#d9ad5c"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Signature picks</h2>
+      <span class="label">FROM THE MENU</span>
+    </div>
+    <div class="card-grid">
+      <div class="menu-card" th:each="item : ${signatureItems}">
+        <div class="card-head">
+        <h3 th:text="${item.name}">Item</h3>
+        <span class="signature-tag">Signature</span>
+        </div>
+        <p th:text="${item.description}">Description</p>
+        <div class="price" th:text="'Rs ' + ${item.priceRs}">Rs 0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <div class="section-head">
+      <h2>What people are saying</h2>
+      <span class="label" th:text="${averageRating} + ' AVERAGE · ' + ${cafe.googleReviewCount} + ' REVIEWS'">RATING</span>
+    </div>
+    <div class="card-grid">
+      <div class="review-card" th:each="r : ${topReviews}">
+        <div>
+          <span class="reviewer-name" th:text="${r.name}">Name</span>
+          <span class="role-tag" th:text="${r.role}">Role</span>
+        </div>
+        <div class="rating" th:text="${r.ratingStars}">★★★★★</div>
+        <p th:text="${r.reviewText}">Review text</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer(${cafe})}"></div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="'Reviews · ' + ${cafe.name}">Reviews</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div th:replace="~{fragments/header :: header(${activePage})}"></div>
+
+    <section style="padding-top: 48px">
+      <div class="container">
+        <div class="section-head">
+          <h2>Top reviews</h2>
+          <span class="label" th:text="${averageRating} + ' AVERAGE'"
+            >Rating</span
+          >
+        </div>
+        <div class="card-grid" style="margin-bottom: 56px">
+          <div class="review-card" th:each="r : ${topReviews}">
+            <div>
+              <span class="reviewer-name" th:text="${r.name}">Name</span>
+              <span class="role-tag" th:text="${r.role}">Role</span>
+            </div>
+            <div class="rating" th:text="${r.ratingStars}">★★★★★</div>
+            <p th:text="${r.reviewText}">Text</p>
+          </div>
+        </div>
+
+        <div class="section-head">
+          <h2>Full timeline</h2>
+          <span class="label" th:text="${#lists.size(timeline)} + ' REVIEWS'"
+            >Count</span
+          >
+        </div>
+        <div class="card-grid">
+          <div class="review-card" th:each="r : ${timeline}">
+            <div>
+              <span class="reviewer-name" th:text="${r.name}">Name</span>
+              <span class="role-tag" th:text="${r.role}">Role</span>
+            </div>
+            <div class="rating" th:text="${r.ratingStars}">★★★★★</div>
+            <p th:text="${r.reviewText}">Text</p>
+            <div
+              style="font-size: 0.82rem; color: #5a5a4e"
+              th:text="${r.reviewDate}"
+            >
+              Date
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div th:replace="~{fragments/footer :: footer(${cafe})}"></div>
+  </body>
+</html>

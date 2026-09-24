@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="'Menu · ' + ${cafe.name}">Menu</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header(${activePage})}"></div>
+
+<section style="padding-top:48px;">
+  <div class="container">
+    <div class="section-head">
+      <h2>Our Menu</h2>
+      <span class="label" th:text="${cafe.priceRange}">Rs 1,000-2,000</span>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="menu-search" placeholder="Search the menu, e.g. 'tea', 'egg'…" autocomplete="off">
+      <div class="search-results" id="search-results"></div>
+    </div>
+
+    <div class="category-tabs">
+      <a th:each="cat : ${categories}" th:href="'#cat-' + ${cat}" th:text="${cat.displayName}">Category</a>
+    </div>
+
+    <div th:each="entry : ${menuByCategory}" th:id="'cat-' + ${entry.key}" style="margin-bottom:48px;">
+      <h3 th:text="${entry.key.displayName}">Category name</h3>
+      <div class="card-grid">
+        <div class="menu-card" th:each="item : ${entry.value}">
+          <div class="card-head">
+            <h3><a th:href="'/menu/item/' + ${item.id}" th:text="${item.name}">Item</a></h3>
+            <span class="signature-tag" th:if="${item.signature}">Signature</span>
+          </div>
+          <p th:text="${item.description}">Description</p>
+          <div class="price" th:text="'Rs ' + ${item.priceRs}">Rs 0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer(${cafe})}"></div>
+
+<script th:inline="javascript">
+  // Live search against the Trie-backed /api/menu/search endpoint (DSA: prefix search)
+  const input = document.getElementById('menu-search');
+  const resultsBox = document.getElementById('search-results');
+
+  let debounceTimer;
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    const q = input.value.trim();
+    if (q.length === 0) {
+      resultsBox.style.display = 'none';
+      resultsBox.innerHTML = '';
+      return;
+    }
+    debounceTimer = setTimeout(() => {
+      fetch('/api/menu/search?prefix=' + encodeURIComponent(q))
+        .then(r => r.json())
+        .then(items => {
+          resultsBox.innerHTML = '';
+          if (items.length === 0) {
+            resultsBox.innerHTML = '<div style="padding:10px 14px;color:#5a5a4e;">No matches</div>';
+          } else {
+            items.forEach(item => {
+              const a = document.createElement('a');
+              a.href = '/menu/item/' + item.id;
+              a.textContent = item.name + ' — Rs ' + item.priceRs;
+              resultsBox.appendChild(a);
+            });
+          }
+          resultsBox.style.display = 'block';
+        });
+    }, 180);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!resultsBox.contains(e.target) && e.target !== input) {
+      resultsBox.style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>

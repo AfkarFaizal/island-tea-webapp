@@ -1,0 +1,381 @@
+/* ============================================================
+   Island Tea Co. & Ceylon Coffee Club - design tokens
+   Palette grounded in a Ceylon tea estate: deep tea-leaf green,
+   aged brass/gold (tea liquor colour), coffee brown, warm parchment.
+   Typeface pairing: Lora (serif, estate-ledger warmth) for display,
+   Work Sans (clean, quiet) for body/UI text.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --tea-green-deep: #1f3d2e;
+  --tea-green: #2f5741;
+  --tea-green-soft: #eaf0e7;
+  --brass: #b98a34;
+  --brass-light: #d9ad5c;
+  --coffee-brown: #3a2418;
+  --parchment: #f4eedd;
+  --parchment-dark: #e9e0c9;
+  --ink: #23231e;
+  --ink-soft: #5a5a4e;
+
+  --font-display: 'Lora', Georgia, serif;
+  --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-card: 4px;
+  --shadow-soft: 0 1px 3px rgba(35, 35, 30, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--tea-green-deep);
+  margin: 0 0 0.4em 0;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(2.1rem, 4vw, 3.2rem); }
+h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 1em 0; max-width: 62ch; color: var(--ink-soft); }
+
+a { color: var(--tea-green-deep); text-decoration: none; }
+a:hover { color: var(--brass); }
+
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Navigation ---------- */
+.site-header {
+  background: var(--tea-green-deep);
+  border-bottom: 3px solid var(--brass);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  max-width: 1080px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--parchment);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+.brand strong { font-style: normal; color: var(--brass-light); }
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--parchment);
+  font-size: 0.95rem;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--brass-light);
+  border-bottom-color: var(--brass);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--tea-green-deep) 0%, var(--tea-green) 100%);
+  color: var(--parchment);
+  padding: 72px 0 88px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero .eyebrow {
+  color: var(--brass-light);
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.hero h1 { color: var(--parchment); }
+
+.hero p.lede {
+  color: #d9e2d6;
+  font-size: 1.08rem;
+  max-width: 46ch;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 28px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.hero-meta .stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--brass-light);
+}
+
+.hero-meta .stat span {
+  font-size: 0.85rem;
+  color: #c7d2c3;
+}
+
+.leaf-motif {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: var(--radius-card);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--brass);
+  color: var(--coffee-brown);
+}
+.btn-primary:hover { background: var(--brass-light); color: var(--coffee-brown); }
+
+.btn-outline {
+  border-color: var(--parchment);
+  color: var(--parchment);
+}
+.btn-outline:hover { background: rgba(244, 238, 221, 0.1); color: var(--parchment); }
+
+.btn-row { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+
+/* ---------- Sections ---------- */
+section { padding: 64px 0; }
+section.alt { background: var(--tea-green-soft); }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--parchment-dark);
+  padding-bottom: 14px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.section-head .label {
+  color: var(--brass);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ---------- Cards ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.menu-card {
+  background: #fff;
+  border: 1px solid var(--parchment-dark);
+  border-radius: var(--radius-card);
+  padding: 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.menu-card .card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 0.4em;
+}
+
+.menu-card .card-head h3 {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.menu-card .price {
+  font-family: var(--font-display);
+  color: var(--brass);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.menu-card .signature-tag {
+  flex: 0 0 auto;
+  background: var(--tea-green-deep);
+  color: var(--brass-light);
+  font-size: 0.72rem;
+  padding: 3px 9px;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-top: 3px;
+}
+
+.review-card {
+  background: #fff;
+  border-left: 3px solid var(--brass);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-soft);
+}
+
+.review-card .reviewer-name {
+  font-family: var(--font-display);
+  color: var(--tea-green-deep);
+  font-weight: 600;
+}
+
+.review-card .role-tag {
+  font-size: 0.78rem;
+  color: var(--brass);
+  margin-left: 8px;
+}
+
+.review-card .rating {
+  color: var(--brass);
+  letter-spacing: 1px;
+}
+
+/* ---------- Menu page filters ---------- */
+.category-tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+
+.category-tabs a {
+  padding: 8px 16px;
+  border: 1px solid var(--tea-green);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  color: var(--tea-green-deep);
+}
+
+.category-tabs a:hover { background: var(--tea-green-deep); color: var(--parchment); }
+
+.search-box {
+  position: relative;
+  max-width: 340px;
+  margin-bottom: 34px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--parchment-dark);
+  border-radius: var(--radius-card);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.search-results {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--parchment-dark);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 10;
+  display: none;
+}
+
+.search-results a {
+  display: block;
+  padding: 10px 14px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--parchment);
+  font-size: 0.9rem;
+}
+.search-results a:hover { background: var(--tea-green-soft); }
+
+/* ---------- About / info blocks ---------- */
+.info-list { list-style: none; padding: 0; margin: 0; }
+.info-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--parchment-dark);
+  display: flex;
+  gap: 14px;
+}
+.info-list li .k { color: var(--brass); min-width: 110px; font-weight: 500; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--coffee-brown);
+  color: #cfc3b4;
+  padding: 40px 0;
+  margin-top: 40px;
+}
+
+.site-footer a { color: var(--brass-light); }
+.site-footer .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 0.9rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .leaf-motif { max-width: 220px; margin: 0 auto; }
+  .nav-links { gap: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
