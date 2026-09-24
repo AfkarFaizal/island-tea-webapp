@@ -16,6 +16,7 @@ mvn spring-boot:run
 ```
 
 Then open [http://localhost:8080]
+Then open  [https://island-tea-webapp-production.up.railway.app]
 
 ## Project layout
 
